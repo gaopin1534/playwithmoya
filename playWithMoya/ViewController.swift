@@ -7,12 +7,30 @@
 //
 
 import UIKit
+import Moya
 
 class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        let provider = MoyaProvider<HackersNewsAPI>()
+        provider.request(.newStories) { result in
+            switch result {
+            case let .success(moyaResponse):
+                do {
+                    try moyaResponse.filterSuccessfulStatusCodes()
+                    let data = try moyaResponse.mapJSON()
+                    print(data)
+                }
+                catch {
+                    // show an error to your user
+                }
+            case let .failure(error):
+                print(error)
+                break
+            }
+            
+        }
     }
 
     override func didReceiveMemoryWarning() {

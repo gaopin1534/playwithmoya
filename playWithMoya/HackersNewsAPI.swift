@@ -31,9 +31,9 @@ extension HackersNewsAPI: TargetType {
         case .maxItem:
             return "/maxitem.json"
         case .newStories:
-            return "/newstories"
+            return "/newstories.json"
         case .topStories:
-            return "/topstories"
+            return "/topstories.json"
         }
     }
     
